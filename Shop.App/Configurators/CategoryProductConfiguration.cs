@@ -13,17 +13,17 @@ public class CategoryProductConfiguration : IEntityTypeConfiguration<CategoryPro
 {
     public void Configure(EntityTypeBuilder<CategoryProduct> builder)
     {
-        builder
-            .HasKey(cp => new { cp.ProductId, cp.CategoryId });
+        //builder
+        //    .HasKey(cp => new { cp.ProductId, cp.CategoryId });
 
-        builder
-            .HasOne(cp => cp.Product)
-            .WithMany(p => p.CategoryProducts)
-            .HasForeignKey(cp => cp.ProductId);
+        //builder
+        //    .HasOne(cp => cp.Product)
+        //    .WithMany(p => p.CategoryProducts)
+        //    .HasForeignKey(cp => cp.ProductId);
 
-        builder
-            .HasOne(cp => cp.Category)
-            .WithMany(c => c.CategoryProducts)
-            .HasForeignKey(cp => cp.CategoryId);
+        //builder
+        //    .HasOne(cp => cp.Category)
+        //    .WithMany(c => c.CategoryProducts)
+        //    .HasForeignKey(cp => cp.CategoryId);
     }
 }

@@ -13,27 +13,27 @@ public class ProductConfiguration : IEntityTypeConfiguration<Product>
 {
     public void Configure(EntityTypeBuilder<Product> builder)
     {
-        builder.ToTable("Products");
+    //    builder.ToTable("Products");
 
-        builder.HasKey(x => x.Id);
+    //    builder.HasKey(x => x.Id);
 
-        builder
-            .Property(x => x.Name)
-            .HasMaxLength(100)
-            .IsRequired();
+    //    builder
+    //        .Property(x => x.Name)
+    //        .HasMaxLength(100)
+    //        .IsRequired();
 
-        builder
-            .Property(p => p.Price)
-            .HasColumnType("decimal(18,2)")
-            .IsRequired();
+    //    builder
+    //        .Property(p => p.Price)
+    //        .HasColumnType("decimal(18,2)")
+    //        .IsRequired();
 
-        builder
-            .Property(p => p.CreatedAt)
-            .HasDefaultValueSql("SYSDATETIME()");
+    //    builder
+    //        .Property(p => p.CreatedAt)
+    //        .HasDefaultValueSql("SYSDATETIME()");
 
-        builder
-            .Property(p => p.StockQuantity)
-            .HasDefaultValue(0);
+    //    builder
+    //        .Property(p => p.StockQuantity)
+    //        .HasDefaultValue(0);
 
         //builder
         //    .HasOne(p => p.Category)

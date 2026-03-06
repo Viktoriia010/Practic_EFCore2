@@ -32,47 +32,47 @@ namespace Shop.App
             if (context.Database.CanConnect())
             {
 
-                var service = new OrderItemService(context);
-                var shop = new Shop(service);
+                //var service = new OrderItemService(context);
+                //var shop = new Shop(service);
 
-                while (true)
-                {
-                    Console.WriteLine();
-                    Console.WriteLine("1 - Add Order");
-                    Console.WriteLine("2 - Add Product To Order");
-                    Console.WriteLine("3 - Change Order Status");
-                    Console.WriteLine("4 - Get Order By Id");
-                    Console.WriteLine("5 - Get Order Items");
-                    Console.WriteLine("0 - Exit");
+                //while (true)
+                //{
+                //    Console.WriteLine();
+                //    Console.WriteLine("1 - Add Order");
+                //    Console.WriteLine("2 - Add Product To Order");
+                //    Console.WriteLine("3 - Change Order Status");
+                //    Console.WriteLine("4 - Get Order By Id");
+                //    Console.WriteLine("5 - Get Order Items");
+                //    Console.WriteLine("0 - Exit");
 
-                    var choice = Console.ReadLine();
+                //    var choice = Console.ReadLine();
 
-                    switch (choice)
-                    {
-                        case "1":
-                            shop.AddOrder();
-                            break;
+                //    switch (choice)
+                //    {
+                //        case "1":
+                //            shop.AddOrder();
+                //            break;
 
-                        case "2":
-                            shop.AddProductToOrder();
-                            break;
+                //        case "2":
+                //            shop.AddProductToOrder();
+                //            break;
 
-                        case "3":
-                            shop.ChangeOrderStatus();
-                            break;
+                //        case "3":
+                //            shop.ChangeOrderStatus();
+                //            break;
 
-                        case "4":
-                            shop.GetOrderById();
-                            break;
+                //        case "4":
+                //            shop.GetOrderById();
+                //            break;
 
-                        case "5":
-                            shop.GetOrderItems();
-                            break;
+                //        case "5":
+                //            shop.GetOrderItems();
+                //            break;
 
-                        case "0":
-                            return;
-                    }
-                }
+                //        case "0":
+                //            return;
+                //    }
+                //}
 
                 //var user = new User
                 //{

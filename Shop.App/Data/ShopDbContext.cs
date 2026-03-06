@@ -24,11 +24,11 @@ public class ShopDbContext: DbContext
     }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.ApplyConfiguration(new ConfigurationUser());
-        modelBuilder.ApplyConfiguration(new CategoryProductConfiguration());
-        modelBuilder.ApplyConfiguration(new CategoryConfiguration());
-        modelBuilder.ApplyConfiguration(new ProductConfiguration());
-        modelBuilder.ApplyConfiguration(new OrderConfiguration());
-        modelBuilder.ApplyConfiguration(new OrderItemConfiguration());
+        //modelBuilder.ApplyConfiguration(new ConfigurationUser());
+        //modelBuilder.ApplyConfiguration(new CategoryProductConfiguration());
+        //modelBuilder.ApplyConfiguration(new CategoryConfiguration());
+        //modelBuilder.ApplyConfiguration(new ProductConfiguration());
+        //modelBuilder.ApplyConfiguration(new OrderConfiguration());
+        //modelBuilder.ApplyConfiguration(new OrderItemConfiguration());
     }
 }
