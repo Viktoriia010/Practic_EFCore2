@@ -11,12 +11,15 @@ namespace Shop.Domain.Entities;
 
 public class Order
 {
+    [Key]
     public int Id { get; set; }
 
     [ForeignKey("User")]
     public int UserId { get; set; }
     public User User { get; set; }
     public DateTime OrderDate { get; set; }
+
+    [Range(0 , double.MaxValue)]
     public decimal TotalAmount { get; set; }
     public OrderStatus Status { get; set; } = OrderStatus.PENDING;
     public ICollection<OrderItem> OrderItems { get; set; }  
