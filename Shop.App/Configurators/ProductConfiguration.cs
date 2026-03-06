@@ -35,10 +35,10 @@ public class ProductConfiguration : IEntityTypeConfiguration<Product>
             .Property(p => p.StockQuantity)
             .HasDefaultValue(0);
 
-        builder
-            .HasOne(p => p.Category)
-            .WithMany(c => c.Products)
-            .HasForeignKey(p => p.CategoryId)
-            .OnDelete(DeleteBehavior.Restrict);
+        //builder
+        //    .HasOne(p => p.Category)
+        //    .WithMany(c => c.Products)
+        //    .HasForeignKey(p => p.CategoryId)
+        //    .OnDelete(DeleteBehavior.Restrict);
     }
 }

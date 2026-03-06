@@ -17,6 +17,7 @@ public class ShopDbContext: DbContext
     public DbSet<User> Users { get; set; }
     public DbSet<Order> Orders { get; set; }
     public DbSet<OrderItem> OrderItems { get; set; }
+    public DbSet<CategoryProduct> CategoryProducts { get; set; }
     public ShopDbContext(DbContextOptions<ShopDbContext> options) : base(options)
     {
 
@@ -24,5 +25,10 @@ public class ShopDbContext: DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.ApplyConfiguration(new ConfigurationUser());
+        modelBuilder.ApplyConfiguration(new CategoryProductConfiguration());
+        modelBuilder.ApplyConfiguration(new CategoryConfiguration());
+        modelBuilder.ApplyConfiguration(new ProductConfiguration());
+        modelBuilder.ApplyConfiguration(new OrderConfiguration());
+        modelBuilder.ApplyConfiguration(new OrderItemConfiguration());
     }
 }

@@ -13,7 +13,6 @@ public class Product
     public decimal Price { get; set; }
     public DateTime CreatedAt { get; set; }
     public int StockQuantity { get; set; }
-    public int CategoryId { get; set; }
-    public Category Category { get; set; }
+    public ICollection<CategoryProduct> CategoryProducts { get; set; } = new List<CategoryProduct>();
     public ICollection<OrderItem> OrderItems { get; set; }
 }
