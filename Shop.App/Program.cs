@@ -31,6 +31,11 @@ namespace Shop.App
 
             if (context.Database.CanConnect())
             {
+                var service = new OrderItemService(context);
+                var shop = new Shop(service, context);
+
+                shop.CreateOrder();
+
 
                 //var service = new OrderItemService(context);
                 //var shop = new Shop(service);

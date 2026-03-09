@@ -98,4 +98,57 @@ public class OrderItemService(ShopDbContext _context)
             .Where(oi => oi.OrderId == orderId)
             .ToList();
     }
+
+    public void CreateOrder(ICollection<(Product product, int quantity)> items, int userId)
+    {
+        using var transaction = _context.Database.BeginTransaction();
+        try
+        {
+            var order = new Order { 
+                UserId = userId,
+                OrderDate = DateTime.Now,
+                Status = OrderStatus.PENDING,
+                TotalAmount = 0
+            };
+
+            _context.Orders.Add(order);
+            _context.SaveChanges();
+
+
+            foreach (var item in items)
+            {
+                if(item.product == null)
+                {
+                    throw new Exception("Product not found");
+                }
+                if(item.product.StockQuantity < item.quantity)
+                {
+                    throw new Exception("Not enough product in store");
+                }
+                var orderItem = new OrderItem
+                {
+                    OrderId = order.Id,
+                    ProductId = item.product.Id,
+                    Quantity = item.quantity,
+                    Price = item.product.Price
+                };
+
+                item.product.StockQuantity -= item.quantity;
+
+                _context.OrderItems.Add(orderItem);
+                _context.SaveChanges();
+
+                order.TotalAmount += item.product.Price * item.quantity; ; 
+            }
+
+
+            _context.SaveChanges();
+            transaction.Commit();
+        }
+        catch
+        {
+            transaction.Rollback();
+            throw (new Exception("Error"));
+        }
+    }
 }

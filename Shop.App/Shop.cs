@@ -1,4 +1,7 @@
-﻿using Shop.App.Services;
+﻿using Microsoft.EntityFrameworkCore;
+using Shop.App.Data;
+using Shop.App.Services;
+using Shop.Domain.Entities;
 using Shop.Domain.Enums;
 using System;
 using System.Collections.Generic;
@@ -8,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Shop.App;
 
-class Shop(OrderItemService _service)
+class Shop(OrderItemService _service, ShopDbContext context)
 {
     public void AddOrder()
     {
@@ -94,6 +97,46 @@ class Shop(OrderItemService _service)
             {
                 Console.WriteLine($"ProductId: {item.ProductId}, Quantity: {item.Quantity}, Price: {item.Price}\n");
             }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error: {ex.Message}");
+        }
+    }
+
+    public void CreateOrder()
+    {
+        try
+        {
+
+            Console.Write("Enter User Id: ");
+            int id = int.Parse(Console.ReadLine());
+
+            var items = new List<(Product product, int quantity)>();
+
+            while (true)
+            {
+                Console.Write("Enter Product Id (0 to complete):");
+                int productId = int.Parse(Console.ReadLine());
+                if (productId == 0) break;
+
+                var product = context.Products.FirstOrDefault(p => p.Id == productId);
+                if (product == null)
+                {
+                    Console.WriteLine("Product not found");
+                    continue;
+                }
+
+                Console.WriteLine("Enter the quantity:");
+                int quantity = int.Parse(Console.ReadLine());
+
+                items.Add((product, quantity));
+            }
+
+            _service.CreateOrder(items, id);
+
+            Console.WriteLine("Order created successfully");
+
         }
         catch (Exception ex)
         {
