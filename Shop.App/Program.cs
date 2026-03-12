@@ -1,6 +1,8 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using Shop.App.Configurators;
 using Shop.App.Data;
+using Shop.App.Repositories;
 using Shop.App.Services;
 using Shop.Domain.Entities;
 using Shop.Domain.Enums;
@@ -19,7 +21,9 @@ namespace Shop.App
             });
 
             services.AddScoped<OrderItemService>();
-            services.AddScoped<Shop>();
+            services.AddScoped<ShopManager>();
+            services.AddScoped<ProductRepository>();
+            services.AddScoped<ProductService>();
             //Створюється вже «працюючий» контейнер.
             var provider = services.BuildServiceProvider();
 
@@ -31,10 +35,64 @@ namespace Shop.App
 
             if (context.Database.CanConnect())
             {
-                var service = new OrderItemService(context);
-                var shop = new Shop(service, context);
+                ProductRepository productRepository = new ProductRepository(context);
+                ProductService productService = new ProductService(productRepository);
+                ShopManager shopManager = new ShopManager(productService);
 
-                shop.CreateOrder();
+                shopManager.Run();
+                //var product = context.Products.First();
+                //var entry = context.Entry(product);
+
+                //Console.WriteLine(context.Entry(product).State);
+
+                //Console.WriteLine(product.Name);
+                //Console.WriteLine(product.Price);
+
+                //product.Price += 5;
+
+                //Console.WriteLine(product.Price);
+                //Console.WriteLine(context.Entry(product).State);
+
+                //var orig = entry.OriginalValues["Price"];
+                //Console.WriteLine(orig);
+                //var cur = entry.CurrentValues["Price"];
+                //Console.WriteLine(cur);
+
+                //context.SaveChanges();
+                //Console.WriteLine(context.Entry(product).State);
+
+                //var products = context.Products.AsNoTracking().ToList();
+
+                //foreach (var product in products)
+                //{
+                //    Console.WriteLine($"Old Price: {product.Price}");
+                //    product.Price += 5;
+                //    Console.WriteLine($"New Price: {product.Price}");
+
+                //    var entry = context.Entry(product);
+                //    Console.WriteLine($"State: {entry.State}");
+                //}
+
+                //context.SaveChanges();
+
+
+                //                Частина 2: NoTracking(читання без відстеження)
+
+
+                //Завдання:
+
+                //                Завантажити всі продукти, де Store = 0, без tracking(AsNoTracking()).
+
+
+                //Спробувати змінити Price на 5 і викликати SaveChanges().
+
+
+                //Подивитися стан entity(Entry().State) та зрозуміти, що EF не бачить змін.
+
+                //var service = new OrderItemService(context);
+                //var shop = new Shop(service, context);
+
+                //shop.CreateOrder();
 
 
                 //var service = new OrderItemService(context);
