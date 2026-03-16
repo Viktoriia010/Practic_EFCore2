@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Shop.App.Configurators;
 using Shop.App.Data;
@@ -6,11 +7,32 @@ using Shop.App.Repositories;
 using Shop.App.Services;
 using Shop.Domain.Entities;
 using Shop.Domain.Enums;
+using System.Data;
+using System.Diagnostics;
 
 namespace Shop.App
 {
     internal class Program
     {
+        static void ProductSeeders(int count, ShopDbContext context)
+        {
+                var random = new Random();
+                var products = new List<Product>();
+                for (int i = 0; i < count; i++)
+                {
+                    products.Add(new Product
+                    {
+                        Name = "Product" + random.Next(1, 1999),
+                        StockQuantity = random.Next(1, 1000),
+                        CreatedAt = DateTime.Now,
+                        Price = random.Next(1, 2000)
+                    }
+                    );
+                }
+                context.AddRange(products);
+                context.SaveChanges();
+        }
+
         static void Main(string[] args)
         {
             var services = new ServiceCollection(); //Створюється контейнер DI (Dependency Injection)
@@ -35,11 +57,25 @@ namespace Shop.App
 
             if (context.Database.CanConnect())
             {
-                ProductRepository productRepository = new ProductRepository(context);
-                ProductService productService = new ProductService(productRepository);
-                ShopManager shopManager = new ShopManager(productService);
 
-                shopManager.Run();
+                var stopwatch = Stopwatch.StartNew();
+
+                var product = context.Products.Where(x => x.Name == "Product568").ToList();
+
+                stopwatch.Stop();
+
+                Console.WriteLine($"Запит виконався за {stopwatch.ElapsedMilliseconds} ms");
+                foreach (var item in product)
+                {
+                    Console.WriteLine($"{item.Id} {item.Name} {item.CreatedAt} {item.Price} {item.StockQuantity}");
+                }
+                //ProductSeeders(2_000_000, context);
+
+                //ProductRepository productRepository = new ProductRepository(context);
+                //ProductService productService = new ProductService(productRepository);
+                //ShopManager shopManager = new ShopManager(productService);
+
+                //shopManager.Run();
                 //var product = context.Products.First();
                 //var entry = context.Entry(product);
 

@@ -11,40 +11,24 @@ namespace Shop.App.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AlterColumn<string>(
-                name: "Surname",
-                table: "Users",
-                type: "nvarchar(100)",
-                maxLength: 100,
-                nullable: false,
-                oldClrType: typeof(string),
-                oldType: "nvarchar(max)");
-
-            migrationBuilder.AlterColumn<string>(
                 name: "Name",
-                table: "Users",
+                table: "Products",
                 type: "nvarchar(100)",
                 maxLength: 100,
                 nullable: false,
                 oldClrType: typeof(string),
-                oldType: "nvarchar(max)");
+                oldType: "nvarchar(1000)",
+                oldMaxLength: 1000);
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AlterColumn<string>(
-                name: "Surname",
-                table: "Users",
-                type: "nvarchar(max)",
-                nullable: false,
-                oldClrType: typeof(string),
-                oldType: "nvarchar(100)",
-                oldMaxLength: 100);
-
-            migrationBuilder.AlterColumn<string>(
                 name: "Name",
-                table: "Users",
-                type: "nvarchar(max)",
+                table: "Products",
+                type: "nvarchar(1000)",
+                maxLength: 1000,
                 nullable: false,
                 oldClrType: typeof(string),
                 oldType: "nvarchar(100)",

@@ -12,7 +12,7 @@ using Shop.App.Data;
 namespace Shop.App.Migrations
 {
     [DbContext(typeof(ShopDbContext))]
-    [Migration("20260306174226_Initial")]
+    [Migration("20260316110538_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -175,14 +175,16 @@ namespace Shop.App.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<int>("Role")
                         .HasColumnType("int");
 
                     b.Property<string>("Surname")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.HasKey("Id");
 

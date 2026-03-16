@@ -17,6 +17,13 @@ public static class DbContextConfigurator
             .AddJsonFile("appsettings.json")
             .Build();
 
+        //options.UseMySql(
+        //        configuration.GetConnectionString("MYSQLConnection"),
+        //        ServerVersion.AutoDetect(
+        //            configuration.GetConnectionString("MYSQLConnection")
+        //        )
+        // );
+
         options.UseSqlServer(
             configuration.GetConnectionString("MSSQLConnection"));
     }

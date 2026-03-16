@@ -11,7 +11,7 @@ public class Product
 {
     public int Id { get; set; }
 
-    [MaxLength(1000)]
+    [MaxLength(100)]
     [Required]
     public string Name { get; set; } = string.Empty;
 
